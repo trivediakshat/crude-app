@@ -1,0 +1,28 @@
+<div>
+  <header class="app-header">
+    Angular application
+  </header>
+  <div class="align-centre">
+    <img src="assets/images/welcome.jpeg">
+  </div>
+  <!-- <div class="align-centre"> -->
+    <div class="align-centre" *ngIf="spinnerFlag"><mat-spinner></mat-spinner></div>
+    <div class="app-container table-header" *ngIf="!spinnerFlag">
+      <div class="child-div">Title</div>
+      <div>Description</div>
+    </div>
+    
+    <div *ngFor="let data of details" class="alternate-color app-container">
+      <div class="child-div table-col">{{data.title}}</div>
+      <div class="table-col" style="width: 30%;">{{data.description}}</div>
+      <div class="table-col" style="width: 40%;">
+        <button mat-raised-button color="warn" class ="btn-class"(click)=deleteTask(data.title,data)>Delete</button>
+        <button mat-raised-button color="primary" class ="btn-class"(click)="openDialog(data)">Update</button>
+      </div>
+    </div>
+  <!-- </div> -->
+  <button *ngIf="!spinnerFlag" mat-raised-button color="primary" class="add-btn" (click)="openDialog(setTask)">Add a new row</button>
+  <footer class="app-footer">
+    <p>Design and Coded: Akshat Trivedi</p>
+  </footer>
+</div>

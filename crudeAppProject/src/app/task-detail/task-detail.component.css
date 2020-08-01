@@ -1,0 +1,30 @@
+.headercls{
+    font-size: 20px;
+    font-weight: 600;
+    font-family: sans-serif;
+    margin-bottom:10px;
+}
+
+
+.feildscls{
+    margin-bottom: 10px;
+    
+    
+}
+.buttoncls{
+    float:right!important;
+    
+}
+.labelcls{
+    margin-bottom: 3px;
+    display: block;
+}
+.btn-class{
+        margin-right: 8px;
+}
+.is-invalid{
+    border:1px solid red;
+}
+.invalid-feedback{
+    color:red;
+}

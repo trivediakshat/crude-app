@@ -1,0 +1,35 @@
+<div>
+    <div class="headercls">Please add details:</div>
+    <form  (ngSubmit)="f.form.valid && saveTask(taskDetails)" #f="ngForm" novalidate>
+    <div class="feildscls">
+       <label class="labelcls">Description: <span style="color:red;">*</span></label>
+        <!-- <input matInput placeholder="Simple placeholder" [(ngModel)]="taskDetails.description" > -->
+        <textarea matInput rows="4" cols="20" name="description" [(ngModel)]="taskDetails.description" [ngClass]="{ 'is-invalid': f.submitted && !taskDetails.description }" required></textarea>
+        <div *ngIf="f.submitted && !taskDetails.description" class="invalid-feedback">
+            Description is required
+        </div>
+    </div>
+
+    <div class="feildscls">
+        <label class="labelcls">Priority: <span style="color:red;">*</span></label>
+        <input matInput placeholder="Simple placeholder" name="priority" [(ngModel)]="taskDetails.priority" [ngClass]="{ 'is-invalid': f.submitted && !taskDetails.priority }" required>
+        <div *ngIf="f.submitted && !taskDetails.priority" class="invalid-feedback">
+            Priorty is required
+        </div>
+    </div>
+    <div class="feildscls">
+        <label class="labelcls">Status: <span style="color:red;">*</span></label>
+        <input matInput placeholder="Simple placeholder" name="status" [(ngModel)]="taskDetails.status" [ngClass]="{ 'is-invalid': f.submitted && !taskDetails.status }" required>
+        <div *ngIf="f.submitted && !taskDetails.status" class="invalid-feedback">
+            Status is required
+        </div>
+    </div>
+    <div class="buttoncls">
+        <button mat-raised-button color="warn" class="btn-class" (click)="onNoClick()">Close</button>
+        <!-- <button mat-raised-button color="primary" (click)="saveTask(taskDetails)">Save</button> -->
+        <button mat-raised-button color="primary" >Save</button>
+
+    </div>
+
+    </form>
+</div>
