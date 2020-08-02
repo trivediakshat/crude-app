@@ -19,14 +19,21 @@ export class TaskDetailComponent  {
   taskDetails:any;
   constructor( public dialogRef: MatDialogRef<AppComponent>,fb: FormBuilder,public backendAPI : BackendApiService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { 
+      this.taskDetails=[];
       this.taskDetails = data;
-      console.log(data);
+     
     
     }
     saveTask(taskDetails){
-      this.backendAPI.postDetails(taskDetails).subscribe(data=>{
-        console.log(data);
-      });
+      if(taskDetails.hasOwnProperty('title') && taskDetails.title){
+        this.backendAPI.putDetails(taskDetails).subscribe(data=>{
+          console.log(data);
+        });
+      }else{
+        this.backendAPI.postDetails(taskDetails).subscribe(data=>{
+          console.log(data);
+        });
+      }
       this.dialogRef.close();
     }
   onNoClick(): void {

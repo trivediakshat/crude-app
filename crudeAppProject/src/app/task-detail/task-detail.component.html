@@ -3,7 +3,6 @@
     <form  (ngSubmit)="f.form.valid && saveTask(taskDetails)" #f="ngForm" novalidate>
     <div class="feildscls">
        <label class="labelcls">Description: <span style="color:red;">*</span></label>
-        <!-- <input matInput placeholder="Simple placeholder" [(ngModel)]="taskDetails.description" > -->
         <textarea matInput rows="4" cols="20" name="description" [(ngModel)]="taskDetails.description" [ngClass]="{ 'is-invalid': f.submitted && !taskDetails.description }" required></textarea>
         <div *ngIf="f.submitted && !taskDetails.description" class="invalid-feedback">
             Description is required
@@ -26,7 +25,6 @@
     </div>
     <div class="buttoncls">
         <button mat-raised-button color="warn" class="btn-class" (click)="onNoClick()">Close</button>
-        <!-- <button mat-raised-button color="primary" (click)="saveTask(taskDetails)">Save</button> -->
         <button mat-raised-button color="primary" >Save</button>
 
     </div>

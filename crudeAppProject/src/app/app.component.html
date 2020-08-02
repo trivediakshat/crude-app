@@ -5,9 +5,10 @@
   <div class="align-centre">
     <img src="assets/images/welcome.jpeg">
   </div>
-  <!-- <div class="align-centre"> -->
+  <div style="min-height: calc(100vh - 277px);">
     <div class="align-centre" *ngIf="spinnerFlag"><mat-spinner></mat-spinner></div>
-    <div class="app-container table-header" *ngIf="!spinnerFlag">
+    <div  class="app-container" *ngIf="!details">No data to display</div>
+    <div class="app-container table-header" *ngIf="details && details.length !==0">
       <div class="child-div">Title</div>
       <div>Description</div>
     </div>
@@ -16,13 +17,13 @@
       <div class="child-div table-col">{{data.title}}</div>
       <div class="table-col" style="width: 30%;">{{data.description}}</div>
       <div class="table-col" style="width: 40%;">
-        <button mat-raised-button color="warn" class ="btn-class"(click)=deleteTask(data.title,data)>Delete</button>
-        <button mat-raised-button color="primary" class ="btn-class"(click)="openDialog(data)">Update</button>
+        <button mat-raised-button color="warn" title="Delete" class ="btn-class fa fa-trash"(click)=deleteTask(data.title,data)> Delete</button>
+        <button mat-raised-button color="primary" title="Update"class ="btn-class fa fa-pencil-square-o"(click)="openDialog(data)"> Edit</button>
       </div>
     </div>
-  <!-- </div> -->
-  <button *ngIf="!spinnerFlag" mat-raised-button color="primary" class="add-btn" (click)="openDialog(setTask)">Add a new row</button>
-  <footer class="app-footer">
+    <button  mat-raised-button color="primary" class="add-btn fa fa-plus" (click)="openDialog(setTask)"> Add new row</button>
+  </div>
+  <footer class="app-footer align-centre">
     <p>Design and Coded: Akshat Trivedi</p>
   </footer>
 </div>

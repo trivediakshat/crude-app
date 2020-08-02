@@ -7,19 +7,24 @@ import { Observable, of, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class BackendApiService {
-baseUrl:string='https://tasksmanager-302f5.firebaseio.com/';
+baseUrl:string='https://tasksmanager-302f5.firebaseio.com/Task.json';
   constructor(private http: HttpClient) { }
   getDetails():Observable<any[]>{
-    let endPoint ='Task.json';
-    return this.http.get<any[]>(this.baseUrl+endPoint)
+    return this.http.get<any[]>(this.baseUrl)
   }
   postDetails(data):Observable<any[]>{
-    let endPoint =data.title ? data.title : 'Task' +'.json';
-    return this.http.post<any[]>(this.baseUrl +endPoint,data)
+    let endPoint ='Task';
+    delete data.title;
+    return this.http.post<any[]>(`https://tasksmanager-302f5.firebaseio.com/${endPoint}.json`,data);
+  }
+  putDetails(data):Observable<any[]>{
+    let endPoint =data.title;
+    delete data.title;
+    return this.http.put<any[]>(`https://tasksmanager-302f5.firebaseio.com/Task/${endPoint}.json`,data);
   }
   deleteDetails(data,task):Observable<any[]>{
-    let endPoint =data +'.json';
-    return this.http.get<any[]>(this.baseUrl+endPoint)
+    let endPoint =data;
+    return this.http.delete<any[]>(`https://tasksmanager-302f5.firebaseio.com/Task/${endPoint}.json`)
   }
 }
 

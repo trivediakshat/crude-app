@@ -26,30 +26,58 @@ export class AppComponent {
   getData(){
     this.spinnerFlag = true;
     this.backendAPI.getDetails().subscribe(data => {
-      this.details = Object.values(data);
-      if(this.details){
-        this.spinnerFlag =false;
-        this.details.forEach((element, index) => {
-          if (typeof (element) !== 'string')
-            element.title = Object.keys(data)[index];
-          console.log(element);
-        });
+      this.spinnerFlag =false;
+      this.details =data;
+      if(data && data.length !==0){
+        this.details = Object.values(data);
+        if(this.details){
+          this.details.forEach((element, index) => {
+            if (typeof (element) !== 'string')
+              element.title = Object.keys(data)[index];
+            });
+          }
+          console.log(this.details);
       }
-     
+    },error=>{
+      this.spinnerFlag =false;
     });
   }
   deleteTask(data,task) {
+    let self =this;
     this.backendAPI.deleteDetails(data,task).subscribe(data => {
-      this.getData();
+      setTimeout(function(){
+        self.getData();
+      },1000);
+      
+        
+     
+      
     });
   }
   openDialog(details): void {
+    let taskDetails ={
+      description: details.description,
+        id: details.id,
+        priority: details.priority,
+        status: details.status,
+        title:details.title
+    }
     const dialogRef = this.dialog.open(TaskDetailComponent, {
       width: '20%',
-      data: details
+      data: taskDetails
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      let self =this;
+      this.setTask = {
+        description: "",
+        id: '',
+        priority: "",
+        status: "",
+      }
+      setTimeout(function(){
+        self.getData();
+      },1000);
       console.log('The dialog was closed');
     });
   }
