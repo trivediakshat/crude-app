@@ -5,9 +5,11 @@ import { FormBuilder } from '@angular/forms';
 import { BackendApiService } from '../service/backend-api.service';
 import { FormsModule } from '@angular/forms';
 import { TaskDetailComponent } from './task-detail.component';
+import { AppComponent } from '../app.component';
 describe('TaskDetailComponent', () => {
   let component: TaskDetailComponent;
   let fixture: ComponentFixture<TaskDetailComponent>;
+  let AppComponent : AppComponent;
   beforeEach(() => {
     const matDialogRefStub = () => ({ close: () => ({}) });
     const formBuilderStub = () => ({});
@@ -18,7 +20,7 @@ describe('TaskDetailComponent', () => {
     TestBed.configureTestingModule({
       imports: [FormsModule],
       schemas: [NO_ERRORS_SCHEMA],
-      declarations: [TaskDetailComponent],
+      declarations: [TaskDetailComponent,AppComponent],
       providers: [
         { provide: MatDialogRef, useFactory: matDialogRefStub },
         { provide: FormBuilder, useFactory: formBuilderStub },
@@ -33,7 +35,7 @@ describe('TaskDetailComponent', () => {
   });
   describe('onNoClick', () => {
     it('makes expected calls', () => {
-      const matDialogRefStub: MatDialogRef = fixture.debugElement.injector.get(
+      const matDialogRefStub: MatDialogRef<AppComponent> = fixture.debugElement.injector.get(
         MatDialogRef
       );
       spyOn(matDialogRefStub, 'close').and.callThrough();
